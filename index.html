@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal - Modern Store</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!----------------------- font ----------------------------->
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display: wght@400; 700;900&family=DM+Sans: wght@300;
+  400;500&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+  <!---------------------- navbar ----------------------------->
+  <nav>
+    <!-- logo -->
+    <div class="logo">P<span>or</span>tal</div>
+    <!-- nav right -->
+    <div class="nav-right">
+      <div class="search-wrap">
+        <!-- search icon svg -->
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8" />
+          <path d="M21 211-4.35-4.35" />
+        </svg>
+        <!-- search input -->
+        <input type="text" placeholder="Search..." id="searchInput">
+      </div>
+      <!-- button -->
+      <button class="cart-btn" onclick="OpenDrawer()">
+        <!-- Cart icon SVG -->
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4H6z" />
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <path d="M16 10a4 4 0 0 1-8 0" />
+        </svg>
+        <!-- span -->
+        <span class="cart-count">0</span>
+      </button>
+    </div>
+  </nav>
+
+  <!----------------------- HERO ------------------------------>
+  <section class="hero">
+    <h1>Suuqa Suuqyadda<br><em>Ee Portal</em> Store.</h1>
+    <p>Alaabo tayo sare leh
+      oo si taxaddar leh loo
+      xushay. Buuq ma jiro.
+      Tanaasulna ma jiro..
+    </p>
+  </section>
+
+  <!-- data-cat="Electronics"
+    This is a custom data attribute.
+    HTML lets you store extra information using attributes that begin with data-
+-->
+  <!------------------------------ FILTERS --------------------------->
+  <div class="filters">
+    <span class="filter-label">Filter:</span>
+    <!-- buttons -->
+    <button class="filter-btn active" data-cat="all">All</button>
+    <button class="filter-btn" data-cat="Laptop">Laptop</button>
+    <button class="filter-btn" data-cat="Camera">Camera</button>
+    <button class="filter-btn" data-cat="Audio">Audio</button>
+    <!-- dropdown prices -->
+    <select class="sort-select" id="sortSelect">
+      <option value="default">Sort: Default</option>
+      <option value="asc">Price: Low > High</option>
+      <option value="desc">Price: High > →Low</option>
+      <option value="name">Name: A > Z</option>
+    </select>
+  </div>
+
+  <!------------------------ PRODUCTS SECTION -------------------------->
+   <section class="products-section">
+    <div class="products-grid" id="productsGrid">
+      <!-- Products will be dynamically inserted here -->
+
+    </div>
+   </section>
+
+   <!------------------------------ toaster / messege ------------------------>
+   <div class="toast" id="toast"></div>
+
+   <!--------------------------- cart Overlay ------------------------>
+   <div class="overlay" id="overlay" onclick="CloseDrawer()"></div>
+
+   <!--------------------------- drawer ------------------------------>
+   <div class="drawer" id="cartDrawer">
+      <div class="drawer-header">
+        <span class="drawer-title">Your Cart</span>
+        <button class="close-btn" id="closeCart" onclick="CloseDrawer()">&times;</button>
+      </div>
+      <div class="cart-items" id="cartItems">
+        cart item
+      </div>
+
+      <div class="drawer-footer">
+        <div class="totals-row"><span>Subtotal</span><span id="subtotal">$0.00</span></div>
+        <div class="totals-row"><span>Shipping</span><span id="shipping">Free</span></div>
+        <div class="totals-row grand"><span>Total</span><span id="total">$0.00</span></div>
+        <button class="checkout-btn" id="checkoutBtn" disabled>Proceed to Checkout</button>
+      </div>
+   </div>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="footer-top">
+
+    <!-- Brand -->
+    <div class="footer-brand">
+      <h2 class="footer-logo">
+        P<span>O</span>RTAL
+      </h2>
+
+      <p class="footer-tagline">
+        Alaabo tayo sare leh oo si taxaddar
+        leh loo xushay. Buuq ma jiro.
+      </p>
+
+      <div class="footer-socials">
+        <a href="#">Instagram</a>
+        <a href="#">Twitter</a>
+        <a href="#">Facebook</a>
+      </div>
+    </div>
+
+    <!-- Shop -->
+    <div class="footer-col">
+      <h3 class="footer-col-title">Shop</h3>
+
+      <ul class="footer-links">
+        <li><a href="#">Electronics</a></li>
+        <li><a href="#">Apparel</a></li>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Audio</a></li>
+        <li><a href="#">Accessories</a></li>
+      </ul>
+    </div>
+
+    <!-- Support -->
+    <div class="footer-col">
+      <h3 class="footer-col-title">Support</h3>
+
+      <ul class="footer-links">
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Shipping Info</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">Track Order</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="footer-col">
+      <h3 class="footer-col-title">Contact</h3>
+
+      <ul class="footer-links">
+        <li><a href="mailto:hello@portal.com">hello@portal.com</a></li>
+        <li><a href="tel:+252610000000">+252 61 000 0000</a></li>
+        <li><a href="#">Mogadishu, Somalia</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Bottom -->
+  <div class="footer-bottom">
+    <p class="footer-copy">
+      © 2024 Portal Store. All rights reserved.
+    </p>
+
+    <p class="footer-copy">
+      Made with ♥  in Mogadishu
+    </p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+
+</html>
