@@ -23,7 +23,7 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DM Sans', 'Poppins', sans-serif;
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
@@ -131,38 +131,26 @@ nav {
 
 /* --------------------- hero ----------------------- */
 .hero {
-  height: 350px; /*change size 600px*/
+  height: 350px;
   position: relative;
   padding: 7rem 3rem 4rem;
   text-align: center;
   overflow: hidden;
 }
 
-/*
-ellipse 60% 50% at 50% 0%
-
-    ellipse → an oval-shaped gradient.
-    60% 50% → the width and height of the oval.
-    at 50% 0% → the center of the gradient is at the top center of the element.
-    rgba(201, 168, 76, 0.12) 0% → starts with a semi-transparent gold color.
-    transparent 70% → gradually fades to transparent by 70% of the radius.
-
-This creates a soft glowing effect from the top center of the .hero section. 
- */
-
 .hero::before {
   content: " ";
   position: absolute;
-  inset: 0; /*all four sides. top,right,bottom,left = 0 */
+  inset: 0;
   background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(201, 168, 76, 0.12) 0%, transparent 70%);
 }
 
 .hero h1 {
-  font-family: 'PlayfairDisplay', serif;
-  font-size: clamp(2.4rem, 6vw, 5rem); /*clamp(minimum, preferred, maximum)*/
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 6vw, 5rem);
   font-weight: 900;
   line-height: 1.05;
-  letter-spacing: -0. 01em;
+  letter-spacing: -0.01em;
   margin-bottom: 1rem;
 }
 
@@ -184,7 +172,7 @@ This creates a soft glowing effect from the top center of the .hero section.
   align-items: center;
   gap: 0.6rem;
   padding: 0 2rem 1.5rem;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
 }
 
 .filter-label {
@@ -233,8 +221,8 @@ This creates a soft glowing effect from the top center of the .hero section.
 
 .products-grid {
   display: grid;
-  padding:  1rem 8rem;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /*300*/
+  padding: 1rem 8rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.5rem;
 }
 
@@ -247,7 +235,7 @@ This creates a soft glowing effect from the top center of the .hero section.
   display: flex;
   flex-direction: column;
   transition: transform 0.25s, border-color 0.25s;
-  animation: fadeUp 1s ease both;
+  animation: fadeUp 0.6s ease both;
 }
 
 .card:hover {
@@ -255,7 +243,6 @@ This creates a soft glowing effect from the top center of the .hero section.
   border-color: var(--accent);
 }
 
-/* animations for products card */
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -271,6 +258,7 @@ This creates a soft glowing effect from the top center of the .hero section.
 .card-img {
   width: 100%;
   aspect-ratio: 1 / 1;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -279,7 +267,8 @@ This creates a soft glowing effect from the top center of the .hero section.
 }
 
 .card-img img {
-  width: 350px;
+  max-width: 80%;
+  max-height: 80%;
 }
 
 .badge {
@@ -318,7 +307,6 @@ This creates a soft glowing effect from the top center of the .hero section.
   line-height: 1.3;
 }
 
-
 .card-desc {
   font-size: 0.82rem;
   color: var(--muted);
@@ -351,7 +339,7 @@ This creates a soft glowing effect from the top center of the .hero section.
   background: transparent;
   border: 1px solid var(--accent);
   color: var(--accent);
-  padding: 0.42rem  0.9rem;
+  padding: 0.42rem 0.9rem;
   border-radius: var(--radius);
   font-family: inherit;
   font-size: 0.82rem;
@@ -369,14 +357,14 @@ This creates a soft glowing effect from the top center of the .hero section.
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 200; /*under*/
+  z-index: 200;
   pointer-events: none;
   transition: opacity 0.3s;
-  opacity: 0; /*hide overlay*/
+  opacity: 0;
 }
 
 .overlay.open {
-  opacity: 1; /*show overlay*/
+  opacity: 1;
   pointer-events: all;
 }
 
@@ -390,16 +378,15 @@ This creates a soft glowing effect from the top center of the .hero section.
   background: var(--surface);
   box-shadow: -4px 0 8px rgba(0, 0, 0, 0.2);
   border-left: 1px solid var(--border);
-  z-index: 2001; /* over*/
+  z-index: 201;
   display: flex;
   flex-direction: column;
-  transform: translateX(100%); /*hide drawer*/
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1); 
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* js later */
 .drawer.open {
-  transform: translateX(0); /*show*/
+  transform: translateX(0);
 }
 
 .drawer-header {
@@ -464,10 +451,11 @@ This creates a soft glowing effect from the top center of the .hero section.
   background: var(--surface);
   border-radius: 2px;
   flex-shrink: 0;
+  overflow: hidden;
 }
 
 .cart-item-info {
-  flex: 1; /*inta badan qaado*/
+  flex: 1;
 }
 
 .cart-item-name {
@@ -579,7 +567,7 @@ This creates a soft glowing effect from the top center of the .hero section.
 }
 
 .checkout-btn:disabled {
-  opacity: 4;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
@@ -682,7 +670,6 @@ This creates a soft glowing effect from the top center of the .hero section.
   opacity: 0.6;
 }
 
-
 /*--------------------------- FOOTER RESPONSIVE -------------------------*/
 @media (max-width: 600px) {
   .footer-top {
@@ -703,7 +690,7 @@ This creates a soft glowing effect from the top center of the .hero section.
 
 /* RESPONSIVE */
 @media (max-width: 600px) {
-  .nav {
+  nav {
     padding: 0 1rem;
   }
 
@@ -726,6 +713,7 @@ This creates a soft glowing effect from the top center of the .hero section.
   .products-grid {
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
+    padding: 1rem;
   }
 }
 
@@ -740,6 +728,168 @@ This creates a soft glowing effect from the top center of the .hero section.
 .empty svg {
   opacity: 0.3;
   margin-bottom: 1rem;
+}
+
+/*=========================== CHECKOUT MODAL =============================*/
+#checkoutOverlay {
+  z-index: 400; /* sits above the cart drawer's own overlay */
+}
+
+.checkout-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -48%) scale(0.97);
+  width: min(460px, 92vw);
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  z-index: 401;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.checkout-modal.open {
+  opacity: 1;
+  pointer-events: all;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.checkout-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.checkout-body {
+  padding: 1.4rem 1.5rem 1.8rem;
+  overflow-y: auto;
+}
+
+.checkout-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-bottom: 0.8rem;
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.checkout-summary-total {
+  margin-bottom: 1.4rem;
+}
+
+.form-section-title {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin: 1.2rem 0 0.7rem;
+}
+
+.form-section-title:first-of-type {
+  margin-top: 0;
+}
+
+.form-row {
+  margin-bottom: 0.9rem;
+}
+
+.form-row.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.form-row label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.form-row input {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.6rem 0.8rem;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 0.88rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-row input:focus {
+  border-color: var(--accent);
+}
+
+.checkout-disclaimer {
+  margin-top: 0.8rem;
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.success-icon {
+  color: var(--accent);
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.success-title {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.success-text {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-bottom: 0.3rem;
+}
+
+.order-number {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  margin-bottom: 1.6rem;
+}
+
+@media (max-width: 600px) {
+  .checkout-modal {
+    width: 94vw;
+    max-height: 92vh;
+  }
+
+  .form-row.two-col {
+    grid-template-columns: 1fr;
+  }
 }
 
 /*--------------- TOAST ---------------------*/

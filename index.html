@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="style.css">
 
   <!----------------------- font ----------------------------->
-  <link href="https://fonts.googleapis.com/css?family=Playfair+Display: wght@400; 700;900&family=DM+Sans: wght@300;
-  400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
 
 </head>
 
@@ -24,7 +24,7 @@
         <!-- search icon svg -->
         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <circle cx="11" cy="11" r="8" />
-          <path d="M21 211-4.35-4.35" />
+          <path d="M21 21l-4.35-4.35" />
         </svg>
         <!-- search input -->
         <input type="text" placeholder="Search..." id="searchInput">
@@ -66,6 +66,7 @@
     <button class="filter-btn" data-cat="Laptop">Laptop</button>
     <button class="filter-btn" data-cat="Camera">Camera</button>
     <button class="filter-btn" data-cat="Audio">Audio</button>
+    <button class="filter-btn" data-cat="Accessories">Accessories</button>
     <!-- dropdown prices -->
     <select class="sort-select" id="sortSelect">
       <option value="default">Sort: Default</option>
@@ -76,110 +77,187 @@
   </div>
 
   <!------------------------ PRODUCTS SECTION -------------------------->
-   <section class="products-section">
+  <section class="products-section">
     <div class="products-grid" id="productsGrid">
       <!-- Products will be dynamically inserted here -->
 
     </div>
-   </section>
+  </section>
 
-   <!------------------------------ toaster / messege ------------------------>
-   <div class="toast" id="toast"></div>
+  <!------------------------------ toaster / messege ------------------------>
+  <div class="toast" id="toast"></div>
 
-   <!--------------------------- cart Overlay ------------------------>
-   <div class="overlay" id="overlay" onclick="CloseDrawer()"></div>
+  <!--------------------------- cart Overlay ------------------------>
+  <div class="overlay" id="overlay" onclick="CloseDrawer()"></div>
 
-   <!--------------------------- drawer ------------------------------>
-   <div class="drawer" id="cartDrawer">
-      <div class="drawer-header">
-        <span class="drawer-title">Your Cart</span>
-        <button class="close-btn" id="closeCart" onclick="CloseDrawer()">&times;</button>
+  <!--------------------------- drawer ------------------------------>
+  <div class="drawer" id="cartDrawer">
+    <div class="drawer-header">
+      <span class="drawer-title">Your Cart</span>
+      <button class="close-btn" id="closeCart" onclick="CloseDrawer()">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      cart item
+    </div>
+
+    <div class="drawer-footer">
+      <div class="totals-row"><span>Subtotal</span><span id="subtotal">$0.00</span></div>
+      <div class="totals-row"><span>Shipping</span><span id="shipping">Free</span></div>
+      <div class="totals-row grand"><span>Total</span><span id="total">$0.00</span></div>
+      <button class="checkout-btn" id="checkoutBtn" disabled>Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <!--------------------------- checkout overlay + modal ------------------------>
+  <div class="overlay" id="checkoutOverlay"></div>
+
+  <div class="checkout-modal" id="checkoutModal">
+    <div class="checkout-header">
+      <span class="drawer-title">Checkout</span>
+      <button class="close-btn" id="closeCheckoutBtn">&times;</button>
+    </div>
+
+    <div class="checkout-body">
+
+      <!-- STEP 1: payment form -->
+      <div id="checkoutStepPay">
+
+        <div class="checkout-summary" id="checkoutSummaryItems"></div>
+        <div class="totals-row grand checkout-summary-total">
+          <span>Total due</span><span id="checkoutSummaryTotal">$0.00</span>
+        </div>
+
+        <form id="checkoutForm">
+          <h3 class="form-section-title">Shipping details</h3>
+          <div class="form-row">
+            <label>Full name
+              <input type="text" id="fullName" required autocomplete="name" placeholder="Jane Doe">
+            </label>
+          </div>
+          <div class="form-row">
+            <label>Email
+              <input type="email" id="email" required autocomplete="email" placeholder="jane@example.com">
+            </label>
+          </div>
+          <div class="form-row">
+            <label>Shipping address
+              <input type="text" id="address" required autocomplete="street-address" placeholder="123 Main St, Mogadishu">
+            </label>
+          </div>
+
+          <h3 class="form-section-title">Payment details</h3>
+          <div class="form-row">
+            <label>Card number
+              <input type="text" id="cardNumber" required inputmode="numeric" maxlength="19"
+                placeholder="1234 5678 9012 3456" autocomplete="cc-number">
+            </label>
+          </div>
+          <div class="form-row two-col">
+            <label>Expiry
+              <input type="text" id="cardExpiry" required maxlength="5" placeholder="MM/YY" autocomplete="cc-exp">
+            </label>
+            <label>CVV
+              <input type="text" id="cardCvv" required inputmode="numeric" maxlength="4" placeholder="123"
+                autocomplete="cc-csc">
+            </label>
+          </div>
+
+          <button type="submit" class="checkout-btn" id="payNowBtn">Pay Now</button>
+          <p class="checkout-disclaimer">This is a demo checkout — no real payment is processed.</p>
+        </form>
       </div>
-      <div class="cart-items" id="cartItems">
-        cart item
+
+      <!-- STEP 2: success -->
+      <div id="checkoutStepSuccess" class="hidden">
+        <div class="success-icon">
+          <svg width="56" height="56" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M8 12l3 3 5-6" />
+          </svg>
+        </div>
+        <h3 class="success-title">Order confirmed!</h3>
+        <p class="success-text">Thanks for shopping with Portal. Your order number is</p>
+        <p class="order-number" id="orderNumber">PT-000000</p>
+        <button class="checkout-btn" id="continueShoppingBtn">Continue Shopping</button>
       </div>
 
-      <div class="drawer-footer">
-        <div class="totals-row"><span>Subtotal</span><span id="subtotal">$0.00</span></div>
-        <div class="totals-row"><span>Shipping</span><span id="shipping">Free</span></div>
-        <div class="totals-row grand"><span>Total</span><span id="total">$0.00</span></div>
-        <button class="checkout-btn" id="checkoutBtn" disabled>Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="footer-top">
+
+      <!-- Brand -->
+      <div class="footer-brand">
+        <h2 class="footer-logo">
+          P<span>O</span>RTAL
+        </h2>
+
+        <p class="footer-tagline">
+          Alaabo tayo sare leh oo si taxaddar
+          leh loo xushay. Buuq ma jiro.
+        </p>
+
+        <div class="footer-socials">
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+          <a href="#">Facebook</a>
+        </div>
       </div>
-   </div>
 
-<!-- ================= FOOTER ================= -->
-<footer class="footer">
-  <div class="footer-top">
+      <!-- Shop -->
+      <div class="footer-col">
+        <h3 class="footer-col-title">Shop</h3>
 
-    <!-- Brand -->
-    <div class="footer-brand">
-      <h2 class="footer-logo">
-        P<span>O</span>RTAL
-      </h2>
+        <ul class="footer-links">
+          <li><a href="#">Electronics</a></li>
+          <li><a href="#">Apparel</a></li>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Audio</a></li>
+          <li><a href="#">Accessories</a></li>
+        </ul>
+      </div>
 
-      <p class="footer-tagline">
-        Alaabo tayo sare leh oo si taxaddar
-        leh loo xushay. Buuq ma jiro.
+      <!-- Support -->
+      <div class="footer-col">
+        <h3 class="footer-col-title">Support</h3>
+
+        <ul class="footer-links">
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Track Order</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="footer-col">
+        <h3 class="footer-col-title">Contact</h3>
+
+        <ul class="footer-links">
+          <li><a href="mailto:hello@portal.com">hello@portal.com</a></li>
+          <li><a href="tel:+252610000000">+252 61 000 0000</a></li>
+          <li><a href="#">Mogadishu, Somalia</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom -->
+    <div class="footer-bottom">
+      <p class="footer-copy">
+        © 2024 Portal Store. All rights reserved.
       </p>
 
-      <div class="footer-socials">
-        <a href="#">Instagram</a>
-        <a href="#">Twitter</a>
-        <a href="#">Facebook</a>
-      </div>
+      <p class="footer-copy">
+        Made with ♥ in Mogadishu
+      </p>
     </div>
+  </footer>
 
-    <!-- Shop -->
-    <div class="footer-col">
-      <h3 class="footer-col-title">Shop</h3>
-
-      <ul class="footer-links">
-        <li><a href="#">Electronics</a></li>
-        <li><a href="#">Apparel</a></li>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Audio</a></li>
-        <li><a href="#">Accessories</a></li>
-      </ul>
-    </div>
-
-    <!-- Support -->
-    <div class="footer-col">
-      <h3 class="footer-col-title">Support</h3>
-
-      <ul class="footer-links">
-        <li><a href="#">FAQ</a></li>
-        <li><a href="#">Shipping Info</a></li>
-        <li><a href="#">Returns</a></li>
-        <li><a href="#">Track Order</a></li>
-      </ul>
-    </div>
-
-    <!-- Contact -->
-    <div class="footer-col">
-      <h3 class="footer-col-title">Contact</h3>
-
-      <ul class="footer-links">
-        <li><a href="mailto:hello@portal.com">hello@portal.com</a></li>
-        <li><a href="tel:+252610000000">+252 61 000 0000</a></li>
-        <li><a href="#">Mogadishu, Somalia</a></li>
-      </ul>
-    </div>
-
-  </div>
-
-  <!-- Bottom -->
-  <div class="footer-bottom">
-    <p class="footer-copy">
-      © 2024 Portal Store. All rights reserved.
-    </p>
-
-    <p class="footer-copy">
-      Made with ♥  in Mogadishu
-    </p>
-  </div>
-</footer>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>
